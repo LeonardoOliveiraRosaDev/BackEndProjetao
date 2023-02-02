@@ -8,7 +8,7 @@ namespace BackEndProjetao.Data
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
         // 3º passo: Fazer a referência necessária para que a table Student - representada pela Entity Student
-        public DbSet<Entities.Student> Students
+        public DbSet<Entities.Student> Student
         {
             get; set;
         }
