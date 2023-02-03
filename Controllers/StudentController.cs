@@ -71,5 +71,42 @@ namespace BackEndProjetao.Controllers
             // 4º passo: retornar o conjuto de valores inseridos.
             return Ok(register);
         }
+
+        // ACTION PARA EXECUTAR A ATUALIZAÇÃO/ALTERAÇÃO DE UM REGISTRO - será responsável por, através do acesso entity, possibilitar a alteração/atualização em um registro.
+
+        // 1º passo: definir uma tarefa assincrona, fazendo uso do atributo [HttpPut], para que o registro possa ser alterado.
+        [HttpPut]
+        public async Task<IActionResult> PutRegister(Student newRegister)
+        {
+            // 2º passo: Acessando a Entity, definir a operação necessária para a atualização/alteração dos dados
+            _dbContex.Student.Update(newRegister);
+
+            // de forma assincrona, fazer uso da operação que "salvamento" da alteração realizada.
+            await _dbContex.SaveChangesAsync();
+
+            // 3º passo: retornar o registro atualizado/alterado
+            return Ok(newRegister);
+        }
+
+        // ACTION DE EXCLUSÃO DE REGISTRO - será resposavel por excluir um registro devidamente identificado e armazenado na base
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> deleteRegister(int id)
+        {
+            // definir uma prop para receber como valor da busca de um registro identificado
+            var delRegister = await _dbContex.Student.FindAsync(id);
+            // verificar se o registro existe
+            if (delRegister == null)
+            {
+                return NotFound();
+            }
+            // Aqui estaremos removendo o registro
+            _dbContex.Student.Remove(delRegister);
+
+            // de forma assincrona, fazer uso da operação que "salvamento" da alteração realizada.
+            await _dbContex.SaveChangesAsync();
+
+            // Retorna a Alteração
+            return Ok();
+        }
     }
 }
