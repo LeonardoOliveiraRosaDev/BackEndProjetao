@@ -28,6 +28,7 @@ namespace BackEndProjetao.Controllers
 
         // 1º passo: Definir o atributo [HttpGet] para que a tarefa assincrona recupere os dados
         [HttpGet]
+        [Route("GetAll")] // Definindo uma rota para localização na API
         public async Task<IActionResult> Get()
         {
             // 2º passo: Definir uma prop, com o objetivo de receber de maneira assincrona - todos os registros da base de dados , a partir do acesso a entity
@@ -39,7 +40,8 @@ namespace BackEndProjetao.Controllers
         // ACTION QUE RESGATA UM UNICO REGISTRO DA BASE - será responsavel por recuperar um unico registro bae - desde que esteja devidamente identificado - e disponibiliza-lo para o front
 
         // definir a tarefa assincrona para recuperar um unico registro da base - para esta funcionalidade ser executada plenamente é necessário, ja no atributo [HttpGet] indicar o parametro do registro
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("GetOne/{id}")]// Definindo uma rota para localização na API
         public async Task<IActionResult> GetRegister(int id)
         {
             // 2º passo: definir uma prop para receber como valor - de maneira assincrona - um registro da base, acessando a entity,devidamente identificado com o parametro id
