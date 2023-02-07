@@ -61,6 +61,7 @@ namespace BackEndProjetao.Controllers
 
         // 1º passo: será usado - para definir esta tarefa assincrona - o atributo [HttpPost]. Dessa forma, a entity será acessada e os dados devem ser enviados
         [HttpPost]
+        [Route("AddRegister")]
         // para inserção de dados SEMPRE-SEMPRE-SEMPRE é necessário definir um parametro que receba os valores referenciados para o dito armazenamento.
         public async Task<IActionResult> Post(Student register)
         {
@@ -78,10 +79,22 @@ namespace BackEndProjetao.Controllers
 
         // 1º passo: definir uma tarefa assincrona, fazendo uso do atributo [HttpPut], para que o registro possa ser alterado.
         [HttpPut]
-        public async Task<IActionResult> PutRegister(Student newRegister)
+        [Route("UpRegister/{id}")]
+        public async Task<IActionResult> PutRegister(int id, Student newRegister)
         {
             // 2º passo: Acessando a Entity, definir a operação necessária para a atualização/alteração dos dados
-            _dbContex.Student.Update(newRegister);
+            //_dbContex.Student.Update(newRegister);
+
+            var foundRegister = await _dbContex.Student.FindAsync(id);
+            // 2ºb passo: Verificar se o valor id existe
+            if(foundRegister == null)
+            {
+                return NotFound();
+            }
+            // 2ºc passo: praticar a atribuição de novos valores às props existentes a partir dos valores recebidos pelo parametro newRegister
+            foundRegister.Name = newRegister.Name;
+            foundRegister.Age = newRegister.Age;
+            foundRegister.Gender = newRegister.Gender;
 
             // de forma assincrona, fazer uso da operação que "salvamento" da alteração realizada.
             await _dbContex.SaveChangesAsync();
@@ -91,7 +104,8 @@ namespace BackEndProjetao.Controllers
         }
 
         // ACTION DE EXCLUSÃO DE REGISTRO - será resposavel por excluir um registro devidamente identificado e armazenado na base
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("delRegister/{id}")]
         public async Task<IActionResult> deleteRegister(int id)
         {
             // definir uma prop para receber como valor da busca de um registro identificado
