@@ -121,7 +121,7 @@ namespace BackEndProjetao.Controllers
             // de forma assincrona, fazer uso da operação que "salvamento" da alteração realizada.
             await _dbContex.SaveChangesAsync();
 
-            // Retorna a Alteraçãod
+            // Retorna a Alteração
             return Ok();
         }
     }
