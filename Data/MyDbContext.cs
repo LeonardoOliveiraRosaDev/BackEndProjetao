@@ -12,5 +12,11 @@ namespace BackEndProjetao.Data
         {
             get; set;
         }
+
+        // New passo: Fazer a referência necessária para que a table Course - representada pela Entity cOURSE
+        public DbSet<Entities.Course> Course
+        {
+            get; set;
+        }
     }
 }
