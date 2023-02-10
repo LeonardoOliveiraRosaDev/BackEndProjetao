@@ -4,6 +4,7 @@
 using Microsoft.EntityFrameworkCore;
 using BackEndProjetao.Data;
 using BackEndProjetao.Data.Entities;
+using System.Runtime.Intrinsics.Arm;
 
 
 namespace BackEndProjetao.Controllers
@@ -32,7 +33,8 @@ namespace BackEndProjetao.Controllers
         {
             // 2º passo: Definir uma prop, com o objetivo de receber de maneira assincrona - todos os registros da base de dados , a partir do acesso a entity
             var coursesList = await _dbContex.Course.ToListAsync();
-
+            //coursesList = (float)(double)d["key"];
+           
             // 3º passo: retornar a lista de registros atribuidas a váriavel
             return Ok(coursesList);
         }
