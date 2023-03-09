@@ -4,7 +4,7 @@
 using Microsoft.EntityFrameworkCore;
 using BackEndProjetao.Data;
 using BackEndProjetao.Data.Entities;
-using System.Runtime.Intrinsics.Arm;
+//using System.Runtime.Intrinsics.Arm;
 
 
 namespace BackEndProjetao.Controllers
@@ -17,7 +17,7 @@ namespace BackEndProjetao.Controllers
     public class CourseController : ControllerBase
     {
 
-        public readonly MyDbContext _dbContex;
+        private readonly MyDbContext _dbContex;
 
 
         public CourseController(MyDbContext dbContex)

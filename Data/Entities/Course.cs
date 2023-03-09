@@ -6,7 +6,7 @@
     {
         // Definir as Props
         public int Id { get; set; }
-        public string NomeCurso { get; set; }
+        public string? NomeCurso { get; set; }
         public double Mensalidade { get; set; }
     }
 }
