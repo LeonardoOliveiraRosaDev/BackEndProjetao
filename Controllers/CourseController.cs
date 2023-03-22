@@ -55,6 +55,7 @@ namespace BackEndProjetao.Controllers
             // 4º passo: se o valor do parametro id existir, o registro sera retornado para o front
             return Ok(courseUnique);
         }
+
         // ACTION PARA INSERIR UM REGISTRO NA BASE
         [HttpPost]
         [Route("AddRegister")]
